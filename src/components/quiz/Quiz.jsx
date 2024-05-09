@@ -2,10 +2,22 @@ import { useState } from 'react';
 import { Button, Paper, Stack, Text, Title } from '@mantine/core';
 import { SingeChoiceQuestion } from './SingleChoiceQuestion';
 import { FreeTextQuestion } from './FreeTextQuestion';
+import { Fireworks } from '@fireworks-js/react';
+import { Result } from './Result';
 
 export const Quiz = ({ description, difficulty, questions }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState(Array(questions.length).fill(''));
+  const [evaluantionResult, setEvaluationResult] = useState();
+  const [isResultOpen, setIsResultOpen] = useState(false);
+  //TODO move this to constants
+  const options = {
+    speed: 3,
+    density: 5,
+    colors: ['#cc3333', '#4CAF50', '#81C784'],
+    zIndex: 100,
+    boundary: { x1: 0, y1: 0, x2: window.innerWidth, y2: window.innerHeight },
+  };
 
   const handleAnswerChange = (value) => {
     const newAnswers = [...answers];
@@ -23,8 +35,12 @@ export const Quiz = ({ description, difficulty, questions }) => {
   const submitAnswers = () => {
     const results = evaluateAnswers();
     const score = results.reduce((acc, curr) => acc + (curr.isCorrect ? 1 : 0), 0);
-    console.log(results);
-    console.log(score);
+    const quizResult = {
+      results: results,
+      score: score,
+    };
+    setEvaluationResult(quizResult);
+    setIsResultOpen(true);
   };
 
   const evaluateAnswers = () => {
@@ -40,6 +56,10 @@ export const Quiz = ({ description, difficulty, questions }) => {
         isCorrect,
       };
     });
+  };
+
+  const closeResults = () => {
+    setIsResultOpen(false);
   };
 
   const renderQuestion = (question) => {
@@ -61,19 +81,30 @@ export const Quiz = ({ description, difficulty, questions }) => {
   };
 
   return (
-    <Stack>
-      <Title>QUIZ</Title>
-      <Text size='lg'>{description}</Text>
-      <Paper shadow='sm' radius='md' withBorder p='xl'>
-        <Stack>
-          {renderQuestion(questions[currentQuestionIndex])}
-          <Button
-            onClick={currentQuestionIndex === questions.length - 1 ? submitAnswers : nextQuestion}
-          >
-            {currentQuestionIndex === questions.length - 1 ? 'Submit answers' : 'Next question'}
-          </Button>
-        </Stack>
-      </Paper>
-    </Stack>
+    <>
+      <Stack>
+        <Title>QUIZ</Title>
+        <Text size='lg'>{description}</Text>
+        <Paper shadow='sm' radius='md' withBorder p='xl'>
+          <Stack>
+            {renderQuestion(questions[currentQuestionIndex])}
+            <Button
+              onClick={currentQuestionIndex === questions.length - 1 ? submitAnswers : nextQuestion}
+            >
+              {currentQuestionIndex === questions.length - 1 ? 'Submit answers' : 'Next question'}
+            </Button>
+          </Stack>
+        </Paper>
+      </Stack>
+      {evaluantionResult && (
+        <Result opened={isResultOpen} result={evaluantionResult} onClose={closeResults} />
+      )}
+      {isResultOpen && (
+        <Fireworks
+          options={options}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        />
+      )}
+    </>
   );
 };
