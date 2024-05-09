@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { TextInput, Button, Group, Paper, Radio, Text } from '@mantine/core';
+import { TextInput, Button, Group, Paper, Radio, Text, SegmentedControl } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconSquarePlus } from '@tabler/icons-react';
 
@@ -21,9 +21,10 @@ export const CreateQuiz = ({ fetchQuiz }) => {
   return (
     <Paper shadow='sm' radius='md' withBorder p='xl'>
       <Text size='xl' mb='md'>
-        Create a new language quiz.
+        Create a new language quiz
       </Text>
       <form onSubmit={form.onSubmit((values) => fetchQuiz(values))}>
+        {/* <form onSubmit={form.onSubmit((values) => console.log(values))}> */}
         <TextInput
           withAsterisk
           label='Language'
@@ -33,19 +34,42 @@ export const CreateQuiz = ({ fetchQuiz }) => {
           key={form.key('language')}
           {...form.getInputProps('language')}
         />
-
-        <Radio.Group
+        <Text size='sm' fw={500} mb={3}>
+          Difficulty level
+        </Text>
+        <SegmentedControl
+          name='difficulty'
+          {...form.getInputProps('difficulty')}
+          fullWidth
+          withItemsBorders={false}
+          data={[
+            {
+              value: 'beginner',
+              label: 'Beginner',
+            },
+            {
+              value: 'intermediate',
+              label: 'Intermediate',
+            },
+            {
+              value: 'advanced',
+              label: 'ProElite',
+            },
+          ]}
+        />
+        {/* <Radio.Group
           name='difficulty'
           label='Difficulty level'
           withAsterisk
           {...form.getInputProps('difficulty')}
         >
+          
           <Group>
             <Radio value={'beginner'} label='Beginner' />
             <Radio value={'intermediate'} label='Intermediate' />
             <Radio value={'advanced'} label='ProElite' />
           </Group>
-        </Radio.Group>
+        </Radio.Group> */}
         <Group justify='center' mt='md'>
           <Button fullWidth type='submit' rightSection={<IconSquarePlus />}>
             Create
