@@ -8,6 +8,7 @@ import { NavLinkGroup } from './components/NavLinkGroup';
 import { HomePage } from './pages/Home.page';
 import { QuizzesPage } from './pages/Quizzes.page';
 import { HistoryPage } from './pages/History.page';
+import { QuizPage } from './pages/Quiz.page';
 
 export const App = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -40,6 +41,7 @@ export const App = () => {
               <Route path='/' element={<HomePage />} />
               <Route path='/quizzes' element={<QuizzesPage />} />
               <Route path='/history' element={<HistoryPage />} />
+              <Route path='/quiz' element={<QuizPage />} />
             </Routes>
           </AppShell.Main>
         </AppShell>

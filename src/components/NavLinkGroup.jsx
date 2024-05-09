@@ -6,7 +6,7 @@ export const NavLinkGroup = () => {
   return (
     <>
       <NavLink label={'Home'} onClick={() => navigate('/')} />
-      <NavLink label={'Quiz'} onClick={() => navigate('/quiz')} />
+      <NavLink label={'Quiz'} onClick={() => navigate('/quizzes')} />
       <NavLink label={'History'} onClick={() => navigate('/history')} />
     </>
   );

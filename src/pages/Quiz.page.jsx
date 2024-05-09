@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Paper, Stack, Text, Title } from '@mantine/core';
-import { SingeChoiceQuestion } from './SingleChoiceQuestion';
-import { FreeTextQuestion } from './FreeTextQuestion';
 import { Fireworks } from '@fireworks-js/react';
-import { Result } from './Result';
+import { SingleChoiceQuestion } from '../components/quiz/SingleChoiceQuestion';
+import { FreeTextQuestion } from '../components/quiz/FreeTextQuestion';
+import { Result } from '../components/quiz/Result';
+import { useNavigate } from 'react-router-dom';
 
-export const Quiz = ({ description, difficulty, questions }) => {
+export const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState(Array(questions.length).fill(''));
+  const [answers, setAnswers] = useState([]);
   const [evaluantionResult, setEvaluationResult] = useState();
   const [isResultOpen, setIsResultOpen] = useState(false);
+  const [quiz, setQuiz] = useState();
+  const navigate = useNavigate();
+
   //TODO move this to constants
   const options = {
     speed: 3,
@@ -17,6 +21,35 @@ export const Quiz = ({ description, difficulty, questions }) => {
     colors: ['#cc3333', '#4CAF50', '#81C784'],
     zIndex: 100,
     boundary: { x1: 0, y1: 0, x2: window.innerWidth, y2: window.innerHeight },
+  };
+
+  useEffect(() => {
+    if (!quiz) {
+      fetchQuizData();
+    }
+  }, [quiz]);
+
+  const fetchQuizData = () => {
+    const quizId = localStorage.getItem('quizId');
+    if (!quizId) {
+      console.error('No quiz ID found in localStorage.');
+      return;
+    }
+
+    const quizString = localStorage.getItem(quizId);
+    localStorage.removeItem('quizId');
+    if (!quizString) {
+      console.error('No quiz data found for ID:', quizId);
+      return;
+    }
+
+    try {
+      const quizData = JSON.parse(quizString);
+      setQuiz(quizData);
+      setAnswers(Array(quizData.questions.length).fill(''));
+    } catch (e) {
+      console.error('Failed to parse quiz data:', e);
+    }
   };
 
   const handleAnswerChange = (value) => {
@@ -27,7 +60,7 @@ export const Quiz = ({ description, difficulty, questions }) => {
 
   const nextQuestion = () => {
     const nextIndex = currentQuestionIndex + 1;
-    if (nextIndex < questions.length) {
+    if (nextIndex < quiz.questions.length) {
       setCurrentQuestionIndex(nextIndex);
     }
   };
@@ -44,7 +77,7 @@ export const Quiz = ({ description, difficulty, questions }) => {
   };
 
   const evaluateAnswers = () => {
-    return questions.map((question, index) => {
+    return quiz.questions.map((question, index) => {
       const userAnswer = answers[index].toLowerCase();
       const correctAnswer = question.correct_answer.toLowerCase();
       const isCorrect = userAnswer === correctAnswer;
@@ -60,11 +93,12 @@ export const Quiz = ({ description, difficulty, questions }) => {
 
   const closeResults = () => {
     setIsResultOpen(false);
+    navigate('/');
   };
 
   const renderQuestion = (question) => {
     return question.type === 'single_choice' ? (
-      <SingeChoiceQuestion
+      <SingleChoiceQuestion
         questionIndex={currentQuestionIndex}
         question={question}
         value={answers[currentQuestionIndex]}
@@ -82,20 +116,26 @@ export const Quiz = ({ description, difficulty, questions }) => {
 
   return (
     <>
-      <Stack>
-        <Title>QUIZ</Title>
-        <Text size='lg'>{description}</Text>
-        <Paper shadow='sm' radius='md' withBorder p='xl'>
-          <Stack>
-            {renderQuestion(questions[currentQuestionIndex])}
-            <Button
-              onClick={currentQuestionIndex === questions.length - 1 ? submitAnswers : nextQuestion}
-            >
-              {currentQuestionIndex === questions.length - 1 ? 'Submit answers' : 'Next question'}
-            </Button>
-          </Stack>
-        </Paper>
-      </Stack>
+      {quiz && (
+        <Stack>
+          <Title>QUIZ</Title>
+          <Text size='lg'>{quiz.description}</Text>
+          <Paper shadow='sm' radius='md' withBorder p='xl'>
+            <Stack>
+              {renderQuestion(quiz.questions[currentQuestionIndex])}
+              <Button
+                onClick={
+                  currentQuestionIndex === quiz.questions.length - 1 ? submitAnswers : nextQuestion
+                }
+              >
+                {currentQuestionIndex === quiz.questions.length - 1
+                  ? 'Submit answers'
+                  : 'Next question'}
+              </Button>
+            </Stack>
+          </Paper>
+        </Stack>
+      )}
       {evaluantionResult && (
         <Result opened={isResultOpen} result={evaluantionResult} onClose={closeResults} />
       )}
