@@ -38,7 +38,7 @@ export const App = () => {
           <AppShell.Main>
             <Routes>
               <Route path='/' element={<HomePage />} />
-              <Route path='/quiz' element={<QuizzesPage />} />
+              <Route path='/quizzes' element={<QuizzesPage />} />
               <Route path='/history' element={<HistoryPage />} />
             </Routes>
           </AppShell.Main>
