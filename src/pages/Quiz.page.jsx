@@ -4,7 +4,9 @@ import { Fireworks } from '@fireworks-js/react';
 import { SingleChoiceQuestion } from '../components/quiz/SingleChoiceQuestion';
 import { FreeTextQuestion } from '../components/quiz/FreeTextQuestion';
 import { Result } from '../components/quiz/Result';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fireworksOptions } from '../utils/constants';
+import { quizRepository } from '../repository/QuizRepository';
 
 export const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -13,15 +15,7 @@ export const QuizPage = () => {
   const [isResultOpen, setIsResultOpen] = useState(false);
   const [quiz, setQuiz] = useState();
   const navigate = useNavigate();
-
-  //TODO move this to constants
-  const options = {
-    speed: 3,
-    density: 5,
-    colors: ['#cc3333', '#4CAF50', '#81C784'],
-    zIndex: 100,
-    boundary: { x1: 0, y1: 0, x2: window.innerWidth, y2: window.innerHeight },
-  };
+  const { id } = useParams();
 
   useEffect(() => {
     if (!quiz) {
@@ -30,25 +24,11 @@ export const QuizPage = () => {
   }, [quiz]);
 
   const fetchQuizData = () => {
-    const quizId = localStorage.getItem('quizId');
-    if (!quizId) {
-      console.error('No quiz ID found in localStorage.');
-      return;
-    }
-
-    const quizString = localStorage.getItem(quizId);
-    localStorage.removeItem('quizId');
-    if (!quizString) {
-      console.error('No quiz data found for ID:', quizId);
-      return;
-    }
-
-    try {
-      const quizData = JSON.parse(quizString);
-      setQuiz(quizData);
-      setAnswers(Array(quizData.questions.length).fill(''));
-    } catch (e) {
-      console.error('Failed to parse quiz data:', e);
+    const quizResponse = quizRepository.getQuiz(id);
+    if (quizResponse) {
+      setQuiz(quizResponse);
+    } else {
+      //TODO NGT GICK FEL
     }
   };
 
@@ -68,6 +48,7 @@ export const QuizPage = () => {
   const submitAnswers = () => {
     const results = evaluateAnswers();
     const score = results.reduce((acc, curr) => acc + (curr.isCorrect ? 1 : 0), 0);
+    quizRepository.setQuizResult(quiz.id, score === 5);
     const quizResult = {
       results: results,
       score: score,
@@ -118,7 +99,7 @@ export const QuizPage = () => {
     <>
       {quiz && (
         <Stack>
-          <Title>QUIZ</Title>
+          <Title>{quiz.title}</Title>
           <Text size='lg'>{quiz.description}</Text>
           <Paper shadow='sm' radius='md' withBorder p='xl'>
             <Stack>
@@ -141,7 +122,7 @@ export const QuizPage = () => {
       )}
       {isResultOpen && (
         <Fireworks
-          options={options}
+          options={fireworksOptions}
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         />
       )}

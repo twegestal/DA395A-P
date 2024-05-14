@@ -1,7 +1,9 @@
 import ky from 'ky';
+import { v4 as uuidv4 } from 'uuid';
 const url = 'https://api.openai.com/v1/chat/completions';
+import { quizRepository } from '../repository/QuizRepository'
 
-export const openAICall = async (language, difficulty) => {
+export const generateQuiz = async (language, difficulty) => {
   const payload = {
     model: 'gpt-3.5-turbo',
     messages: [
@@ -19,9 +21,21 @@ export const openAICall = async (language, difficulty) => {
       })
       .json();
 
-    return response;
+      if (!response) {
+        throw new Error();
+      }
+
+    return storeQuiz(response);
   } catch (error) {
     console.error('Error generating quiz: ', error);
     //TODO: retry...
   }
 };
+
+const storeQuiz = (response) => {
+    const quiz = JSON.parse(response.choices[0].message.content);
+    const uuid = uuidv4();
+    quiz.id = uuid;
+    quizRepository.setQuiz(quiz)
+    return quiz.id;
+}

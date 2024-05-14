@@ -1,10 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { openAICall } from '../services/apiServices';
+import { generateQuiz } from '../services/apiServices';
 import { testObject } from '../test';
 
 export const useQuiz = () => {
-  const [quizResponse, setQuizResponse] = useState();
+  const [quizzes, setQuizzes] = useState();
+
+  useEffect(() => {
+    if (!quizzes) {
+      
+    }
+  });
 
   const generateQuiz = async (language, difficulty) => {
     // const response = await openAICall(language, difficulty);
@@ -18,5 +24,7 @@ export const useQuiz = () => {
     return true;
   };
 
-  return { generateQuiz, quizResponse };
+  const fetchQuiz = (id) => quizzes.forEach((quiz) => quiz.id === id);
+
+  return { generateQuiz, quizzes };
 };

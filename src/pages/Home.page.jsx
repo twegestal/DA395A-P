@@ -1,21 +1,20 @@
 import { CreateQuiz } from '../components/CreateQuiz';
 import { Text, Stack, LoadingOverlay, Title } from '@mantine/core';
 import { useState } from 'react';
-import { useQuiz } from '../hooks/useQuiz';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { generateQuiz } from '../services/apiServices';
 
 export const HomePage = () => {
-  const { generateQuiz } = useQuiz();
+  //const { generateQuiz } = useQuiz();
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
 
-  const fetchQuiz = ({ difficulty, language }) => {
+  const fetchQuiz = async ({ difficulty, language }) => {
     setVisible(true);
-    const response = generateQuiz(language, difficulty);
-    if (response) {
+    const quizId = await generateQuiz(language, difficulty);
+    if (quizId) {
       setVisible(false);
-      navigate('/quiz');
+      navigate(`/quiz/${quizId}`);
     }
   };
 

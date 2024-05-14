@@ -3,13 +3,13 @@ import { Group, Button, Text, Accordion, Center, Box } from '@mantine/core';
 import { IconX, IconCheck, IconMinus } from '@tabler/icons-react';
 import { failColor, successColor } from '../utils/constants';
 
-export const QuizListItem = ({ item }) => {
+export const QuizListItem = ({ item, redirectToQuiz }) => {
   return (
     <Accordion.Item value={item.id} key={item.title}>
       <Center>
         <Accordion.Control
           icon={
-            item.isFinished == null ? (
+            !item.isFinished ? (
               <IconMinus size={30} color='gray' />
             ) : !item.isFinished ? (
               <IconX size={30} color={failColor} />
@@ -28,7 +28,7 @@ export const QuizListItem = ({ item }) => {
           </Group>
         </Accordion.Control>
         <Box>
-          <Button variant='outline' mr='md'>
+          <Button variant='outline' mr='md' onClick={() => redirectToQuiz(item.id)}>
             Start
           </Button>
         </Box>

@@ -1,6 +1,9 @@
 export const testObject = {
+  id: 'a96b53ef-f193-4201-bcfc-8f9ef6134392',
+  title: 'Danish quiz',
   description: 'Test your beginner level Danish vocabulary with this quiz.',
   difficulty: 'beginner',
+  language: 'Danish',
   questions: [
     {
       correct_answer: 'Hej',

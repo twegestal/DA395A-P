@@ -1,71 +1,52 @@
 import { Accordion, Divider, Title } from '@mantine/core';
 import { QuizListItem } from './QuizListItem';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { quizRepository } from '../repository/QuizRepository';
 
-const quizzes = [
-  {
-    id: '1',
-    title: 'Bender Bending Rodríguez',
-    description: 'Fascinated with cooking, though has no sense of taste',
-    difficulty: 'advanced',
-    language: 'Spanish',
-    isFinished: false,
-  },
+export const QuizList = ({ redirectToQuiz }) => {
+  const [quizzes, setQuizzes] = useState();
 
-  {
-    id: '2',
-    title: 'Carol Miller',
-    description: 'One of the richest people on Earth',
-    difficulty: 'intermediate',
-    language: 'Spanish',
-    isFinished: true,
-  },
-
-  {
-    id: '3',
-    title: 'Homer Simpson',
-    description: 'Overweight, lazy, and often ignorant',
-    difficulty: 'beginner',
-    language: 'Langom',
-    isFinished: null,
-  },
-];
-
-export const QuizList = () => {
-  const groupedByLanguage = quizzes.reduce((acc, quiz) => {
-    const language = quiz.language;
-    if (!acc[language]) {
-      acc[language] = [];
+  useEffect(() => {
+    if (!quizzes) {
+      const fetchedQuizzes = quizRepository.getAllQuizzes();
+      fetchedQuizzes.sort((a, b) => a.language.localeCompare(b.language));
+      setQuizzes(fetchedQuizzes);
     }
-    acc[language].push(quiz);
-    return acc;
-  }, {});
-  // const items = quizzes.map((item) => <QuizListItem key={item.id} item={item} />);
+  }, [quizzes]);
+
+  const groupByLanguage = (quizzes) => {
+    return quizzes.reduce((groups, quiz) => {
+      (groups[quiz.language] = groups[quiz.language] || []).push(quiz);
+      return groups;
+    }, {});
+  };
 
   return (
-    <Accordion
-      variant='contained'
-      styles={{
-        chevron: {
-          display: 'none', // This hides the chevron
-        },
-      }}
-    >
-      {Object.entries(groupedByLanguage).map(([language, items]) => (
-        <React.Fragment key={language}>
-          <Divider
-            size='lg'
-            mt='lg'
-            mb='md'
-            label={<Title order={4}>{language}</Title>}
-            labelPosition='left'
-          />
-
-          {items.map((item) => (
-            <QuizListItem key={item.id} item={item} failColor='red' successColor='green' />
+    <>
+      {quizzes && (
+        <Accordion variant='contained' styles={{ chevron: { display: 'none' } }}>
+          {Object.entries(groupByLanguage(quizzes)).map(([language, quizzesInLanguage]) => (
+            <React.Fragment key={language}>
+              <Divider
+                size='lg'
+                mt='lg'
+                mb='md'
+                label={<Title order={4}>{language}</Title>}
+                labelPosition='left'
+              />
+              {quizzesInLanguage.map((quiz) => (
+                <QuizListItem
+                  key={quiz.id}
+                  item={quiz}
+                  failColor='red'
+                  successColor='green'
+                  redirectToQuiz={redirectToQuiz}
+                />
+              ))}
+            </React.Fragment>
           ))}
-        </React.Fragment>
-      ))}
-    </Accordion>
+        </Accordion>
+      )}
+    </>
   );
 };
