@@ -1,7 +1,8 @@
-import { Accordion, Divider, Title } from '@mantine/core';
+/* eslint-disable react/prop-types */
+import { List, Divider, Title } from '@mantine/core';
 import { QuizListItem } from './QuizListItem';
 import React, { useEffect, useState } from 'react';
-import { quizRepository } from '../repository/QuizRepository';
+import { quizRepository } from '../../repository/QuizRepository';
 
 export const QuizList = ({ redirectToQuiz }) => {
   const [quizzes, setQuizzes] = useState();
@@ -24,7 +25,7 @@ export const QuizList = ({ redirectToQuiz }) => {
   return (
     <>
       {quizzes && (
-        <Accordion variant='contained' styles={{ chevron: { display: 'none' } }}>
+        <List>
           {Object.entries(groupByLanguage(quizzes)).map(([language, quizzesInLanguage]) => (
             <React.Fragment key={language}>
               <Divider
@@ -34,18 +35,18 @@ export const QuizList = ({ redirectToQuiz }) => {
                 label={<Title order={4}>{language}</Title>}
                 labelPosition='left'
               />
+
               {quizzesInLanguage.map((quiz) => (
                 <QuizListItem
                   key={quiz.id}
                   item={quiz}
-                  failColor='red'
-                  successColor='green'
                   redirectToQuiz={redirectToQuiz}
+                  status={'fail'}
                 />
               ))}
             </React.Fragment>
           ))}
-        </Accordion>
+        </List>
       )}
     </>
   );

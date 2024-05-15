@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { TextInput, Button, Group, Paper, Radio, Text, SegmentedControl } from '@mantine/core';
+import { TextInput, Button, Group, Paper, Text, SegmentedControl } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconSquarePlus } from '@tabler/icons-react';
 
@@ -24,7 +24,6 @@ export const CreateQuiz = ({ fetchQuiz }) => {
         Create a new language quiz
       </Text>
       <form onSubmit={form.onSubmit((values) => fetchQuiz(values))}>
-        {/* <form onSubmit={form.onSubmit((values) => console.log(values))}> */}
         <TextInput
           withAsterisk
           label='Language'
@@ -57,19 +56,6 @@ export const CreateQuiz = ({ fetchQuiz }) => {
             },
           ]}
         />
-        {/* <Radio.Group
-          name='difficulty'
-          label='Difficulty level'
-          withAsterisk
-          {...form.getInputProps('difficulty')}
-        >
-          
-          <Group>
-            <Radio value={'beginner'} label='Beginner' />
-            <Radio value={'intermediate'} label='Intermediate' />
-            <Radio value={'advanced'} label='ProElite' />
-          </Group>
-        </Radio.Group> */}
         <Group justify='center' mt='md'>
           <Button fullWidth type='submit' rightSection={<IconSquarePlus />}>
             Create
