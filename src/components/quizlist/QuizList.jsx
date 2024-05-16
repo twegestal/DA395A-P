@@ -41,6 +41,7 @@ export const QuizList = ({ redirectToQuiz }) => {
                 mb='md'
                 label={<Title order={4}>{language}</Title>}
                 labelPosition='left'
+                maw={800}
               />
 
               {quizzesInLanguage.map((quiz) => (

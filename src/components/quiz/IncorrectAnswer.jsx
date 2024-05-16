@@ -8,8 +8,10 @@ export const IncorrectAnswer = ({ answer }) => {
   const [showAnswer, setShowAnswer] = useState(false);
   return (
     <Box className='answer-box'>
-      <Box display='flex'>
-        <IconX color={failColor} />
+      <Box display={'flex'}>
+        <Box>
+          <IconX size={30} color={failColor} />
+        </Box>
         <Text ml={10} fw={600}>
           {answer.question}
         </Text>

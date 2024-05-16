@@ -19,7 +19,7 @@ export const CreateQuiz = ({ fetchQuiz }) => {
   });
 
   return (
-    <Paper shadow='sm' radius='md' withBorder p='xl'>
+    <Paper shadow='sm' radius='md' withBorder p='xl' maw={550}>
       <Text size='xl' mb='md'>
         Create a new language quiz
       </Text>

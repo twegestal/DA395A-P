@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { generateQuiz } from '../services/apiServices';
 
 export const HomePage = () => {
-  //const { generateQuiz } = useQuiz();
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -15,13 +14,15 @@ export const HomePage = () => {
     if (quizId) {
       setVisible(false);
       navigate(`/quiz/${quizId}`);
+    } else {
+      navigate('/error');
     }
   };
 
   return (
     <>
       <LoadingOverlay visible={visible} />
-      <Stack align='center' justify='center'>
+      <Stack>
         <Title order={1}>Welcome to the Polygot Lingo Venture</Title>
         <Text>
           You can browse between different quizzes in the menu or create a new quiz below.

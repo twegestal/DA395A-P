@@ -23,7 +23,7 @@ export const QuizPage = () => {
       setAnswers(Array(quizResponse.questions.length).fill(''));
       setQuiz(quizResponse);
     } else {
-      //TODO: NGT GICK FEL
+      navigate('/error');
     }
   };
 
@@ -102,7 +102,7 @@ export const QuizPage = () => {
         <Stack>
           <Title>{quiz.title}</Title>
           <Text size='lg'>{quiz.description}</Text>
-          <Paper shadow='sm' radius='md' withBorder p='xl'>
+          <Paper shadow='sm' radius='md' withBorder p='xl' maw={800}>
             <Stack>
               {renderQuestion(quiz.questions[currentQuestionIndex])}
               <Button

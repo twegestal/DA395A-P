@@ -1,4 +1,4 @@
-import { Box, Text } from '@mantine/core';
+import { Box, Flex, Group, Text } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
 import { successColor } from '../../utils/constants';
 import '../styles.css';
@@ -6,8 +6,10 @@ import '../styles.css';
 export const CorrectAnswer = ({ answer }) => {
   return (
     <Box className='answer-box'>
-      <Box display='flex'>
-        <IconCheck color={successColor} />
+      <Box display={'flex'}>
+        <Box>
+          <IconCheck size={30} color={successColor} />
+        </Box>
         <Text ml={10} fw={600}>
           {answer.question}
         </Text>

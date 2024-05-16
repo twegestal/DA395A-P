@@ -29,7 +29,6 @@ export const generateQuiz = async (language, difficulty) => {
     return storeQuiz(response);
   } catch (error) {
     console.error('Error generating quiz: ', error);
-    //TODO: retry...
   }
 };
 
