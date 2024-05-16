@@ -26,6 +26,7 @@ export const QuizPage = () => {
   const fetchQuizData = () => {
     const quizResponse = quizRepository.getQuiz(id);
     if (quizResponse) {
+      setAnswers(Array(quizResponse.questions.length).fill(''));
       setQuiz(quizResponse);
     } else {
       //TODO NGT GICK FEL

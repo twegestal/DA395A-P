@@ -25,9 +25,13 @@ class QuizRepository {
     return Array.from(this.map.values());
   }
 
-  setQuizResult(id, result) {
-    const userResults = JSON.parse(localStorage.getItem('results') || '[]');
-    userResults[id] = result;
+  setQuizResult(id, isFinished) {
+    let userResults = JSON.parse(localStorage.getItem('results') || '[]');
+
+    userResults = userResults.filter((result) => result.id !== id);
+
+    userResults.push({ id, isFinished });
+
     localStorage.setItem('results', JSON.stringify(userResults));
   }
 }
