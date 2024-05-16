@@ -33,10 +33,12 @@ export const generateQuiz = async (language, difficulty) => {
 };
 
 const storeQuiz = (response) => {
-  const quiz = JSON.parse(response.choices[0].message.content);
-  quiz.language = capitalizeFirstLetter(quiz.language);
-  const uuid = uuidv4();
-  quiz.id = uuid;
+  const quizContent = JSON.parse(response.choices[0].message.content);
+  const quiz = {
+    ...quizContent,
+    language: capitalizeFirstLetter(quizContent.language),
+    id: uuidv4(),
+  };
   quizRepository.setQuiz(quiz);
   return quiz.id;
 };

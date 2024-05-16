@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { TextInput, Button, Group, Paper, Text, SegmentedControl } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconSquarePlus } from '@tabler/icons-react';

@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { Button, Text, Box, Group } from '@mantine/core';
+import { Button, Text, Box } from '@mantine/core';
 import { IconX, IconCheck, IconMinus } from '@tabler/icons-react';
 import { failColor, successColor } from '../../utils/constants';
 import '../styles.css';

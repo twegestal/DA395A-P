@@ -1,4 +1,4 @@
-import { Box, Flex, Group, Text } from '@mantine/core';
+import { Box, Text } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
 import { successColor } from '../../utils/constants';
 import '../styles.css';

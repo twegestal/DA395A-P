@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { List, Divider, Title } from '@mantine/core';
 import { QuizListItem } from './QuizListItem';
 import React, { useEffect, useState } from 'react';

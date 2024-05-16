@@ -3,11 +3,8 @@ import { quizzes } from './quizzes';
 class QuizRepository {
   constructor() {
     this.map = new Map();
-    const userQuizzes = JSON.parse(localStorage.getItem('quizzes'));
-    if (userQuizzes) {
-      userQuizzes.forEach((q) => this.map.set(q.id, q));
-    }
-    quizzes.forEach((q) => this.map.set(q.id, q));
+    const userQuizzes = JSON.parse(localStorage.getItem('quizzes')) || [];
+    [...userQuizzes, ...quizzes].forEach((q) => this.map.set(q.id, q));
   }
 
   getQuiz(id) {
