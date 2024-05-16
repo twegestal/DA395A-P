@@ -7,7 +7,6 @@ import '@mantine/core/styles.css';
 import { NavLinkGroup } from './components/NavLinkGroup';
 import { HomePage } from './pages/Home.page';
 import { QuizzesPage } from './pages/Quizzes.page';
-import { HistoryPage } from './pages/History.page';
 import { QuizPage } from './pages/Quiz.page';
 
 export const App = () => {
@@ -40,7 +39,6 @@ export const App = () => {
             <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='/quizzes' element={<QuizzesPage />} />
-              <Route path='/history' element={<HistoryPage />} />
               <Route path='/quiz/:id' element={<QuizPage />} />
             </Routes>
           </AppShell.Main>

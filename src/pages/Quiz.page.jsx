@@ -17,21 +17,21 @@ export const QuizPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  useEffect(() => {
-    if (!quiz) {
-      fetchQuizData();
-    }
-  }, [quiz]);
-
   const fetchQuizData = () => {
     const quizResponse = quizRepository.getQuiz(id);
     if (quizResponse) {
       setAnswers(Array(quizResponse.questions.length).fill(''));
       setQuiz(quizResponse);
     } else {
-      //TODO NGT GICK FEL
+      //TODO: NGT GICK FEL
     }
   };
+
+  useEffect(() => {
+    if (!quiz) {
+      fetchQuizData();
+    }
+  }, [quiz]);
 
   const handleAnswerChange = (value) => {
     const newAnswers = [...answers];
