@@ -26,13 +26,15 @@ class QuizRepository {
   }
 
   setQuizResult(id, isFinished) {
-    let userResults = JSON.parse(localStorage.getItem('results') || '[]');
+    let userResults = JSON.parse(localStorage.getItem('results') || '{}');
 
-    userResults = userResults.filter((result) => result.id !== id);
-
-    userResults.push({ id, isFinished });
+    userResults[id] = isFinished;
 
     localStorage.setItem('results', JSON.stringify(userResults));
+  }
+
+  getQuizResults() {
+    return JSON.parse(localStorage.getItem('results') || '{}');
   }
 }
 

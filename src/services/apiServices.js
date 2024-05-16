@@ -1,7 +1,8 @@
 import ky from 'ky';
 import { v4 as uuidv4 } from 'uuid';
 const url = 'https://api.openai.com/v1/chat/completions';
-import { quizRepository } from '../repository/QuizRepository'
+import { quizRepository } from '../repository/QuizRepository';
+import { capitalizeFirstLetter } from '../utils/utils';
 
 export const generateQuiz = async (language, difficulty) => {
   const payload = {
@@ -9,7 +10,8 @@ export const generateQuiz = async (language, difficulty) => {
     messages: [
       {
         role: 'user',
-        content: `I want you to create a vocabulary quiz on the language ${language}. There should be five questions. The questions should be either single choice or free text. The difficulty of the quiz should be on a ${difficulty} level. Please provide a description of the quiz. Please answer only with a JSON object using the following schema:{\"type\":\"object\",\"properties\":{\"questions\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"question\":{\"type\":\"string\"},\"type\":{\"type\":\"string\",\"enum\":[\"single_choice\",\"free_text\"]},\"options\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"correct_answer\":{\"type\":\"string\"}},\"required\":[\"question\",\"type\",\"correct_answer\"],\"additionalProperties\":false}},\"description\":{\"type\":\"string\"},\"difficulty\":{\"type\":\"string\",\"enum\":[\"beginner\",\"intermediate\",\"advanced\"]},\"required\":[\"questions\",\"description\",\"difficulty\"],\"additionalProperties\":false}`,
+        /* content: `I want you to create a vocabulary quiz on the language ${language}. There should be five questions. The questions should be either single choice or free text. The difficulty of the quiz should be on a ${difficulty} level. Please provide a description of the quiz. Please answer only with a JSON object using the following schema:{\"type\":\"object\",\"properties\":{\"questions\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"question\":{\"type\":\"string\"},\"type\":{\"type\":\"string\",\"enum\":[\"single_choice\",\"free_text\"]},\"options\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"correct_answer\":{\"type\":\"string\"}},\"required\":[\"question\",\"type\",\"correct_answer\"],\"additionalProperties\":false}},\"description\":{\"type\":\"string\"},\"difficulty\":{\"type\":\"string\",\"enum\":[\"beginner\",\"intermediate\",\"advanced\"]},\"required\":[\"questions\",\"description\",\"difficulty\"],\"additionalProperties\":false}`, */
+        content: `I want you to create a vocabulary quiz on the language ${language}. There should be five questions. The questions should be either single choice or free text. The difficulty of the quiz should be on a ${difficulty} level. Please provide a description of the quiz. Please answer only with a JSON object using the following schema:{\"title\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"difficulty\":{\"type\":\"string\",\"enum\":[\"beginner\",\"intermediate\",\"advanced\"]},\"language\":{\"type\":\"string\"},\"questions\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"correct_answer\":{\"type\":\"string\"},\"options\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"minItems\":1},\"question\":{\"type\":\"string\"},\"type\":{\"type\":\"string\",\"enum\":[\"single_choice\",\"free_text\"]}},\"required\":[\"correct_answer\",\"question\",\"type\"],\"additionalProperties\":false}}},\"required\":[\"title\",\"description\",\"difficulty\",\"language\",\"questions\"],\"additionalProperties\":false}`,
       },
     ],
   };
@@ -21,9 +23,9 @@ export const generateQuiz = async (language, difficulty) => {
       })
       .json();
 
-      if (!response) {
-        throw new Error();
-      }
+    if (!response) {
+      throw new Error();
+    }
 
     return storeQuiz(response);
   } catch (error) {
@@ -33,9 +35,10 @@ export const generateQuiz = async (language, difficulty) => {
 };
 
 const storeQuiz = (response) => {
-    const quiz = JSON.parse(response.choices[0].message.content);
-    const uuid = uuidv4();
-    quiz.id = uuid;
-    quizRepository.setQuiz(quiz)
-    return quiz.id;
-}
+  const quiz = JSON.parse(response.choices[0].message.content);
+  quiz.language = capitalizeFirstLetter(quiz.language);
+  const uuid = uuidv4();
+  quiz.id = uuid;
+  quizRepository.setQuiz(quiz);
+  return quiz.id;
+};

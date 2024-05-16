@@ -9,16 +9,10 @@ import { HomePage } from './pages/Home.page';
 import { QuizzesPage } from './pages/Quizzes.page';
 import { HistoryPage } from './pages/History.page';
 import { QuizPage } from './pages/Quiz.page';
-import { useEffect } from 'react';
-import { quizRepository } from './repository/QuizRepository';
 
 export const App = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
-
-  useEffect(() => {
-    console.log(quizRepository.getAllQuizzes());
-  });
 
   return (
     <BrowserRouter>

@@ -75,7 +75,7 @@ export const QuizPage = () => {
 
   const closeResults = () => {
     setIsResultOpen(false);
-    navigate('/');
+    navigate('/quizzes');
   };
 
   const renderQuestion = (question) => {

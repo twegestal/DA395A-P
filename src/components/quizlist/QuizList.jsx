@@ -6,14 +6,17 @@ import { quizRepository } from '../../repository/QuizRepository';
 
 export const QuizList = ({ redirectToQuiz }) => {
   const [quizzes, setQuizzes] = useState();
+  const [results, setResults] = useState();
 
   useEffect(() => {
     if (!quizzes) {
       const fetchedQuizzes = quizRepository.getAllQuizzes();
       fetchedQuizzes.sort((a, b) => a.language.localeCompare(b.language));
       setQuizzes(fetchedQuizzes);
+
+      setResults(quizRepository.getQuizResults());
     }
-  }, [quizzes]);
+  }, [quizzes, results]);
 
   const groupByLanguage = (quizzes) => {
     return quizzes.reduce((groups, quiz) => {
@@ -22,9 +25,13 @@ export const QuizList = ({ redirectToQuiz }) => {
     }, {});
   };
 
+  const getStatus = (id) => {
+    return results[id] !== undefined ? (results[id] ? 'success' : 'fail') : 'neutral';
+  };
+
   return (
     <>
-      {quizzes && (
+      {quizzes && results && (
         <List>
           {Object.entries(groupByLanguage(quizzes)).map(([language, quizzesInLanguage]) => (
             <React.Fragment key={language}>
@@ -41,7 +48,7 @@ export const QuizList = ({ redirectToQuiz }) => {
                   key={quiz.id}
                   item={quiz}
                   redirectToQuiz={redirectToQuiz}
-                  status={'fail'}
+                  status={getStatus(quiz.id)}
                 />
               ))}
             </React.Fragment>
