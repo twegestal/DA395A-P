@@ -1,5 +1,5 @@
 export const successColor = '#00b341';
-export const failColor = '#ff2825';
+export const failColor = '#E43D3A';
 export const fireworksOptions = {
   speed: 3,
   density: 5,

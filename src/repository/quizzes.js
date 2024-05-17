@@ -77,7 +77,7 @@ export const quizzes = [
     id: '8781ca94-713c-4530-a4b6-7dcad34655a1',
     title: 'Second Danish quiz',
     description: 'Test your beginner level Swedish vocabulary with this quiz.',
-    difficulty: 'advanced',
+    difficulty: 'intermediate',
     language: 'Danish',
     questions: [
       {

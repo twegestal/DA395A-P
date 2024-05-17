@@ -10,6 +10,12 @@
   align-items: center;
 }
 
+@media (max-width: 30em) {
+  .quiz-list-item {
+    flex-direction: column;
+  }
+}
+
 .answer-box {
   border: 1px solid #ccc;
   padding: 10px;
