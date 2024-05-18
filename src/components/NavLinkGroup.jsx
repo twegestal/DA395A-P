@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { NavLink } from '@mantine/core';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -26,6 +27,19 @@ export const NavLinkGroup = ({ toggle }) => {
           navigate('/quizzes');
         }}
         active={location.pathname === '/quizzes'}
+        styles={(theme) => ({
+          label: {
+            fontSize: theme.fontSizes.md,
+          },
+        })}
+      />
+      <NavLink
+        label={'Stats'}
+        onClick={() => {
+          toggle();
+          navigate('/stats');
+        }}
+        active={location.pathname === '/stats'}
         styles={(theme) => ({
           label: {
             fontSize: theme.fontSizes.md,

@@ -4,11 +4,13 @@ import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import logo from './assets/logo.svg';
 import '@mantine/core/styles.css';
+import '@mantine/charts/styles.css';
 import { NavLinkGroup } from './components/NavLinkGroup';
 import { HomePage } from './pages/Home.page';
 import { QuizzesPage } from './pages/Quizzes.page';
 import { QuizPage } from './pages/Quiz.page';
 import { ErrorPage } from './pages/Error.page';
+import { StatsPage } from './pages/Stats.page';
 
 export const App = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -43,6 +45,7 @@ export const App = () => {
               <Route path='/quizzes' element={<QuizzesPage />} />
               <Route path='/quiz/:id' element={<QuizPage />} />
               <Route path='/error' element={<ErrorPage />} />
+              <Route path='/stats' element={<StatsPage />} />
             </Routes>
           </AppShell.Main>
         </AppShell>

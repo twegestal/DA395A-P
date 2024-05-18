@@ -36,6 +36,10 @@ class QuizRepository {
   getQuizResults() {
     return JSON.parse(localStorage.getItem('results') || '{}');
   }
+
+  getTotalAmountOfQuizzes() {
+    return this.map.size;
+  }
 }
 
 export const quizRepository = new QuizRepository();
