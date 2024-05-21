@@ -2,6 +2,7 @@ import { List, Divider, Title } from '@mantine/core';
 import { QuizListItem } from './QuizListItem';
 import React, { useEffect, useState } from 'react';
 import { quizRepository } from '../../repository/QuizRepository';
+import { difficultyOrder } from '../../utils/constants';
 
 export const QuizList = ({ redirectToQuiz }) => {
   const [quizzes, setQuizzes] = useState();
@@ -28,6 +29,10 @@ export const QuizList = ({ redirectToQuiz }) => {
     return results[id] !== undefined ? (results[id] ? 'success' : 'fail') : 'neutral';
   };
 
+  const sortQuizzesByDifficulty = (quizzes) => {
+    return quizzes.sort((a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]);
+  };
+
   return (
     <>
       {quizzes && results && (
@@ -43,7 +48,7 @@ export const QuizList = ({ redirectToQuiz }) => {
                 maw={800}
               />
 
-              {quizzesInLanguage.map((quiz) => (
+              {sortQuizzesByDifficulty(quizzesInLanguage).map((quiz) => (
                 <QuizListItem
                   key={quiz.id}
                   item={quiz}

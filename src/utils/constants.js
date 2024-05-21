@@ -7,3 +7,8 @@ export const fireworksOptions = {
   zIndex: 100,
   boundary: { x1: 0, y1: 0, x2: window.innerWidth, y2: window.innerHeight },
 };
+export const difficultyOrder = {
+  beginner: 1,
+  intermediate: 2,
+  advanced: 3,
+};
