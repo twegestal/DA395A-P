@@ -14,6 +14,10 @@
   .quiz-list-item {
     flex-direction: column;
   }
+  .button-box {
+    width: 80%;
+    margin-top: 10px;
+  }
 }
 
 .answer-box {
@@ -26,4 +30,8 @@
 .modal .mantine-Modal-title {
   font-size: 22px;
   font-weight: bold;
+}
+
+.spoiler-label .mantine-Spoiler-control {
+  font-size: 14px; 
 }

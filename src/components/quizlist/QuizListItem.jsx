@@ -1,4 +1,4 @@
-import { Button, Text, Box, Image, Group, Flex, Tooltip } from '@mantine/core';
+import { Button, Text, Box, Image, Group, Flex, Tooltip, Spoiler } from '@mantine/core';
 import { IconX, IconCheck, IconMinus } from '@tabler/icons-react';
 import { failColor, successColor } from '../../utils/constants';
 import '../styles.css';
@@ -41,13 +41,15 @@ export const QuizListItem = ({ item, redirectToQuiz, status }) => {
               </Tooltip>
             </Group>
           </Flex>
-          <Text size='sm' c='dimmed' fw={400}>
-            {item.description}
-          </Text>
+          <Spoiler maxHeight={40} showLabel='Show more' hideLabel='Hide' className='spoiler-label'>
+            <Text size='sm' c='dimmed' fw={400}>
+              {item.description}
+            </Text>
+          </Spoiler>
         </Box>
       </Flex>
-      <Box mr={6} ml={6}>
-        <Button variant='outline' onClick={() => redirectToQuiz(item.id)}>
+      <Box mr={6} ml={6} className='button-box'>
+        <Button variant='outline' onClick={() => redirectToQuiz(item.id)} fullWidth>
           {status === 'neutral' ? 'Start' : 'Try again'}
         </Button>
       </Box>
