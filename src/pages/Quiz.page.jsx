@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fireworksOptions } from '../utils/constants';
 import { quizRepository } from '../repository/QuizRepository';
 import { IconCircleFilled } from '@tabler/icons-react';
+import { blueManGroupBlue } from '../utils/constants';
 
 export const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -125,7 +126,7 @@ export const QuizPage = () => {
                 height: rem(10),
               },
             }}
-            completedIcon={<IconCircleFilled color={'#228be6'} />}
+            completedIcon={<IconCircleFilled color={blueManGroupBlue} />}
             active={active}
           >
             {quiz.questions.map((_q, index) => (

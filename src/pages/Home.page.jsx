@@ -23,7 +23,7 @@ export const HomePage = () => {
     <>
       <LoadingOverlay visible={visible} />
       <Stack>
-        <Title order={1}>Welcome to the Polygot Lingo Venture</Title>
+        <Title order={1}>Welcome to the Polyglot Lingo Venture</Title>
         <Text>
           You can browse between different quizzes in the menu or create a new quiz below.
         </Text>

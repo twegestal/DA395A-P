@@ -1103,4 +1103,205 @@ export const quizzes = [
       },
     ],
   },
+  {
+    id: '019150b5-04f0-4f35-9dc8-01bd24be6c80',
+    title: 'Mastering the Mystical Language of Anton Tibblish: An Advanced Vocabulary Challenge',
+    description:
+      'Dive into the enchanting world of Anton Tibblish with this advanced-level vocabulary quiz. Test your knowledge of this unique language through a mix of serious and whimsical questions. Are you ready to prove your proficiency?',
+    difficulty: 'advanced',
+    language: 'Anton Tibblish',
+    questions: [
+      {
+        correct_answer: 'Zyquor',
+        options: ['Zyquor', 'Lynder', 'Brogwin', 'Kithar'],
+        question: "In Anton Tibblish, which word means 'eternal wisdom'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Jubwoggle',
+        options: ['Jubwoggle', 'Flibber', 'Snorplint', 'Grizmak'],
+        question: "Which of the following is the Anton Tibblish word for a 'mischievous spirit'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Glimberfrost',
+        question: "What is the term for a 'rare, luminescent snow' in Anton Tibblish?",
+        type: 'free_text',
+      },
+      {
+        correct_answer: 'Blorft',
+        options: ['Blorft', 'Snurl', 'Framblish', 'Tonk'],
+        question: "In Anton Tibblish, which word describes the feeling of 'unexpected joy'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Nebulfrim',
+        options: ['Nebulfrim', 'Dritzel', 'Krawden', 'Yelpif'],
+        question:
+          "What word in Anton Tibblish translates to 'a secret whispered under the moonlight'?",
+        type: 'single_choice',
+      },
+    ],
+  },
+  {
+    id: 'a1743e0e-c888-4e08-bb1f-6360491a23af',
+    title: 'Unlocking the Secrets of Antique Johan Holmbergian: An Advanced Vocabulary Quiz',
+    description:
+      'Embark on an intellectual adventure with our advanced-level quiz designed to test your knowledge of Antique Johan Holmbergian. From the profound to the whimsical, these questions will challenge your understanding of this ancient language. Ready to demonstrate your expertise?',
+    difficulty: 'advanced',
+    language: 'Antique Johan Holmbergian',
+    questions: [
+      {
+        correct_answer: 'Syrath',
+        options: ['Syrath', 'Moriv', 'Tholum', 'Grendel'],
+        question: "In Antique Johan Holmbergian, which word means 'ancient knowledge'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Trivox',
+        options: ['Trivox', 'Xenor', 'Blith', 'Draxen'],
+        question: "Which word in Antique Johan Holmbergian represents a 'mysterious traveler'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Luthmere',
+        question: "What is the term for a 'sacred grove' in Antique Johan Holmbergian?",
+        type: 'free_text',
+      },
+      {
+        correct_answer: 'Zintar',
+        options: ['Zintar', 'Glifen', 'Prantus', 'Harthin'],
+        question:
+          "In Antique Johan Holmbergian, which word describes the sensation of 'unexpected serenity'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Drelb',
+        options: ['Drelb', 'Wintar', 'Flumen', 'Korath'],
+        question:
+          "What word in Antique Johan Holmbergian translates to 'a whispered secret shared by starlight'?",
+        type: 'single_choice',
+      },
+    ],
+  },
+  {
+    id: 'ae03748d-dbb5-4c02-8283-6584bba51be2',
+    title: 'The Mystical Unicorns of Antique Johan Holmbergian: An Advanced Vocabulary Quiz',
+    description:
+      'Immerse yourself in the enchanting world of unicorns as depicted in Antique Johan Holmbergian. This advanced-level quiz will challenge your knowledge of unicorn-related vocabulary in this ancient language. Are you ready to uncover the secrets of these mythical creatures?',
+    difficulty: 'advanced',
+    language: 'Antique Johan Holmbergian',
+    questions: [
+      {
+        correct_answer: 'Quinlor',
+        options: ['Quinlor', 'Drafnir', 'Elothar', 'Venthos'],
+        question: "In Antique Johan Holmbergian, which word means 'unicorn'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Grimvorn',
+        options: ['Grimvorn', 'Zelphar', 'Wyrinth', 'Holinth'],
+        question: "Which word in Antique Johan Holmbergian represents a 'unicorn's horn'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Starlumina',
+        question:
+          "What is the term for the 'glow of a unicorn's mane' in Antique Johan Holmbergian?",
+        type: 'free_text',
+      },
+      {
+        correct_answer: 'Eldorim',
+        options: ['Eldorim', 'Glimrath', 'Jovinar', 'Thrixel'],
+        question: "In Antique Johan Holmbergian, which word describes a 'unicorn's magical realm'?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Mirathorn',
+        options: ['Mirathorn', 'Vorthin', 'Jelpar', 'Nithra'],
+        question:
+          "What word in Antique Johan Holmbergian translates to 'a unicorn's protective aura'?",
+        type: 'single_choice',
+      },
+    ],
+  },
+  {
+    id: '12bbf751-1e24-49cf-9418-d05788caa3a2',
+    title: 'Master the Mystique of Anton Tibblish: An Advanced Vocabulary Quiz on IF Elfsborg',
+    description:
+      'Dive deep into the intricate and whimsical language of Anton Tibblish, focusing on the beloved football club IF Elfsborg. This advanced-level quiz will test your knowledge with a mix of serious inquiries and delightfully absurd questions. Challenge yourself and see if you can unravel the linguistic mysteries!',
+    difficulty: 'advanced',
+    language: 'Anton Tibblish',
+    questions: [
+      {
+        correct_answer: 'Elfborrska',
+        options: ['Elfborrska', 'Elborafiska', 'Eleborski', 'Elforbanski'],
+        question: 'What is the native Anton Tibblish term for the supporters of IF Elfsborg?',
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Guliganerna',
+        options: ['Guliganerna', 'Gulonator', 'Guligana', 'Gulaginar'],
+        question: 'In Anton Tibblish, what is the nickname for the IF Elfsborg fan club?',
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Boras',
+        options: ['Boras', 'Borasta', 'Boroski', 'Borash'],
+        question: 'What is the Anton Tibblish word for the city where IF Elfsborg is based?',
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Känsla',
+        options: ['Känsla', 'Kinsa', 'Kenara', 'Kinsla'],
+        question:
+          'Which Anton Tibblish word captures the essence of the passion and spirit of IF Elfsborg fans?',
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Vuvuzela mimics the call of the Elfsborg Hawk.',
+        question: 'Explain in Anton Tibblish: How is the vuvuzela significant to IF Elfsborg?',
+        type: 'free_text',
+      },
+    ],
+  },
+  {
+    id: 'd6b4c05a-e46c-4860-a32a-218730c78caa',
+    title: 'Crack the Code: Cockney Rhyming Slang Quiz',
+    description:
+      "Ready to have a butcher's at Cockney Rhyming Slang? This intermediate-level quiz will test your knowledge of this unique and colorful language with a mix of serious and whimsical questions. Do you have what it takes to speak like a true Cockney?",
+    difficulty: 'intermediate',
+    language: 'Cockney Rhyming Slang',
+    questions: [
+      {
+        correct_answer: 'Stairs',
+        options: ['Stairs', 'Door', 'Window', 'Roof'],
+        question: "In Cockney Rhyming Slang, what does 'Apples and Pears' mean?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Phone',
+        options: ['Phone', 'Wallet', 'Car', 'Watch'],
+        question: "What does 'Dog and Bone' refer to in Cockney Rhyming Slang?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Money',
+        question: "In Cockney Rhyming Slang, what does 'Bread and Honey' mean?",
+        type: 'free_text',
+      },
+      {
+        correct_answer: 'Wife',
+        options: ['Wife', 'Husband', 'Friend', 'Child'],
+        question: "What does 'Trouble and Strife' mean in Cockney Rhyming Slang?",
+        type: 'single_choice',
+      },
+      {
+        correct_answer: 'Eyes',
+        options: ['Eyes', 'Ears', 'Hands', 'Feet'],
+        question: "In Cockney Rhyming Slang, what does 'Mince Pies' refer to?",
+        type: 'single_choice',
+      },
+    ],
+  },
 ];

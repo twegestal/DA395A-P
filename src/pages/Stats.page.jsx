@@ -1,7 +1,7 @@
 import { Title, Text } from '@mantine/core';
 import { PieChart } from '@mantine/charts';
 import { quizRepository } from '../repository/QuizRepository';
-import { failColor, successColor } from '../utils/constants';
+import { failColor, successColor, blueManGroupBlue } from '../utils/constants';
 
 export const StatsPage = () => {
   const totAmt = quizRepository.getTotalAmountOfQuizzes();
@@ -17,9 +17,26 @@ export const StatsPage = () => {
     { name: 'Done', value: amtDone, color: successColor },
     { name: 'Total', value: amtTried - amtDone, color: failColor },
   ];
+  const data3 = [
+    { name: 'Attempted', value: amtTried, color: blueManGroupBlue },
+    { name: 'Total', value: totAmt - amtTried, color: 'gray.6' },
+  ];
   return (
     <>
       <Title order={1}>Statistics</Title>
+      <Text>
+        You&apos;ve attempted {((amtTried / totAmt) * 100).toFixed(0)}% of the total amount of
+        quizzes.
+      </Text>
+
+      <PieChart
+        withLabelsLine
+        labelsPosition='outside'
+        labelsType='value'
+        withLabels
+        data={data3}
+      />
+
       <Text>
         You&apos;ve successfully completed {((amtDone / totAmt) * 100).toFixed(0)}% of the total
         amount of quizzes.
@@ -34,10 +51,7 @@ export const StatsPage = () => {
       />
       {amtTried > 0 && (
         <>
-          <Text>
-            You&apos;ve successfully completed {((amtDone / amtTried) * 100).toFixed(0)}% of the
-            quizzes you&apos;ve tried.
-          </Text>
+          <Text>Your success rate is {((amtDone / amtTried) * 100).toFixed(0)}%.</Text>
           <PieChart
             withLabelsLine
             labelsPosition='outside'

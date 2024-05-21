@@ -1,6 +1,6 @@
-# Polygot Lingo Venture
+# Polyglot Lingo Venture
 
-Polygot Lingo Venture is a language quiz web app where you can learn new languages.
+Polyglot Lingo Venture is a language quiz web app where you can learn new languages.
 
 ## Features
 
