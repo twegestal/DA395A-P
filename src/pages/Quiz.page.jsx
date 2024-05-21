@@ -11,7 +11,7 @@ import { quizRepository } from '../repository/QuizRepository';
 export const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const [evaluantionResult, setEvaluationResult] = useState();
+  const [evaluationResult, setEvaluationResult] = useState();
   const [isResultOpen, setIsResultOpen] = useState(false);
   const [quiz, setQuiz] = useState();
   const navigate = useNavigate();
@@ -100,8 +100,6 @@ export const QuizPage = () => {
     <>
       {quiz && (
         <Stack>
-          <Title>{quiz.title}</Title>
-          <Text size='lg'>{quiz.description}</Text>
           <Paper shadow='sm' radius='md' withBorder p='xl' maw={800}>
             <Stack>
               {renderQuestion(quiz.questions[currentQuestionIndex])}
@@ -118,8 +116,8 @@ export const QuizPage = () => {
           </Paper>
         </Stack>
       )}
-      {evaluantionResult && (
-        <Result opened={isResultOpen} result={evaluantionResult} onClose={closeResults} />
+      {evaluationResult && (
+        <Result opened={isResultOpen} result={evaluationResult} onClose={closeResults} />
       )}
       {isResultOpen && (
         <Fireworks
