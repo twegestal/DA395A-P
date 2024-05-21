@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Paper, Stack, Text, Title } from '@mantine/core';
+import { Button, Paper, Stack, Stepper, rem } from '@mantine/core';
 import { Fireworks } from '@fireworks-js/react';
 import { SingleChoiceQuestion } from '../components/quiz/SingleChoiceQuestion';
 import { FreeTextQuestion } from '../components/quiz/FreeTextQuestion';
@@ -7,6 +7,7 @@ import { Result } from '../components/quiz/Result';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fireworksOptions } from '../utils/constants';
 import { quizRepository } from '../repository/QuizRepository';
+import { IconCircleFilled } from '@tabler/icons-react';
 
 export const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -16,6 +17,7 @@ export const QuizPage = () => {
   const [quiz, setQuiz] = useState();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [active, setActive] = useState(0);
 
   const fetchQuizData = () => {
     const quizResponse = quizRepository.getQuiz(id);
@@ -42,11 +44,14 @@ export const QuizPage = () => {
   const nextQuestion = () => {
     const nextIndex = currentQuestionIndex + 1;
     if (nextIndex < quiz.questions.length) {
+      setActive(nextIndex);
       setCurrentQuestionIndex(nextIndex);
     }
   };
 
   const submitAnswers = () => {
+    const nextIndex = currentQuestionIndex + 1;
+    setActive(nextIndex);
     const results = evaluateAnswers();
     const score = results.reduce((acc, curr) => acc + (curr.isCorrect ? 1 : 0), 0);
     quizRepository.setQuizResult(quiz.id, score === 5);
@@ -99,8 +104,35 @@ export const QuizPage = () => {
   return (
     <>
       {quiz && (
-        <Stack>
-          <Paper shadow='sm' radius='md' withBorder p='xl' maw={800}>
+        <Stack maw={800}>
+          <Stepper
+            styles={{
+              stepBody: {
+                display: 'none',
+              },
+
+              step: {
+                padding: 0,
+              },
+
+              stepIcon: {
+                borderWidth: rem(4),
+              },
+
+              separator: {
+                marginLeft: rem(-2),
+                marginRight: rem(-2),
+                height: rem(10),
+              },
+            }}
+            completedIcon={<IconCircleFilled color={'#228be6'} />}
+            active={active}
+          >
+            {quiz.questions.map((_q, index) => (
+              <Stepper.Step key={index} />
+            ))}
+          </Stepper>
+          <Paper shadow='sm' radius='md' withBorder p='xl'>
             <Stack>
               {renderQuestion(quiz.questions[currentQuestionIndex])}
               <Button

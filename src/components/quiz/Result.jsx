@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Modal } from '@mantine/core';
+import { Stack, Modal, Button } from '@mantine/core';
 import { CorrectAnswer } from './CorrectAnswer';
 import { IncorrectAnswer } from './IncorrectAnswer';
 import '../styles.css';
@@ -23,6 +23,7 @@ export const Result = ({ opened, result: { results, score }, onClose }) => {
             )}
           </React.Fragment>
         ))}
+        <Button onClick={onClose}>Close</Button>
       </Stack>
     </Modal>
   );
