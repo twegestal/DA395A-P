@@ -11,6 +11,7 @@ import { QuizzesPage } from './pages/Quizzes.page';
 import { QuizPage } from './pages/Quiz.page';
 import { ErrorPage } from './pages/Error.page';
 import { StatsPage } from './pages/Stats.page';
+import './App.css';
 
 export const App = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -32,7 +33,7 @@ export const App = () => {
             <Group h='100%' px='md'>
               <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom='sm' size='sm' />
               <Link to='/'>
-                <Image src={logo} height={'30px'} />
+                <Image src={logo} className='logo' />
               </Link>
             </Group>
           </AppShell.Header>
