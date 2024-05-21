@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+
 import { Button, Text, Box, Image, Group, Flex } from '@mantine/core';
 import { IconX, IconCheck, IconMinus } from '@tabler/icons-react';
 import { failColor, successColor } from '../../utils/constants';
