@@ -10,10 +10,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  plugins: [
-    'react-refresh',
-    'unused-imports'
-  ],
+  plugins: ['react-refresh', 'unused-imports'],
   rules: {
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
@@ -25,7 +22,7 @@ module.exports = {
         varsIgnorePattern: '^_',
         args: 'after-used',
         argsIgnorePattern: '^_',
-        ignoreRestSiblings: true
+        ignoreRestSiblings: true,
       },
     ],
     'react/prop-types': 'off',

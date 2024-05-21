@@ -21,8 +21,8 @@ export const StatsPage = () => {
     <>
       <Title order={1}>Statistics</Title>
       <Text>
-        You&apos;ve completed {((amtDone / totAmt) * 100).toFixed(0)}% of the total amount of
-        quizzes.
+        You&apos;ve successfully completed {((amtDone / totAmt) * 100).toFixed(0)}% of the total
+        amount of quizzes.
       </Text>
 
       <PieChart
@@ -32,17 +32,21 @@ export const StatsPage = () => {
         withLabels
         data={data1}
       />
-      <Text>
-        You&apos;ve successfully completed {((amtDone / amtTried) * 100).toFixed(0)}% of the quizzes
-        you&apos;ve tried.
-      </Text>
-      <PieChart
-        withLabelsLine
-        labelsPosition='outside'
-        labelsType='value'
-        withLabels
-        data={data2}
-      />
+      {amtTried > 0 && (
+        <>
+          <Text>
+            You&apos;ve successfully completed {((amtDone / amtTried) * 100).toFixed(0)}% of the
+            quizzes you&apos;ve tried.
+          </Text>
+          <PieChart
+            withLabelsLine
+            labelsPosition='outside'
+            labelsType='value'
+            withLabels
+            data={data2}
+          />
+        </>
+      )}
     </>
   );
 };

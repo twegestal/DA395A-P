@@ -1,11 +1,11 @@
-
-import { Button, Text, Box, Image, Group, Flex } from '@mantine/core';
+import { Button, Text, Box, Image, Group, Flex, Tooltip } from '@mantine/core';
 import { IconX, IconCheck, IconMinus } from '@tabler/icons-react';
 import { failColor, successColor } from '../../utils/constants';
 import '../styles.css';
 import beginnerLogo from '../../assets/beginner.svg';
 import intermediateLogo from '../../assets/intermediate.svg';
 import advancedLogo from '../../assets/advanced.svg';
+import { capitalizeFirstLetter } from '../../utils/utils';
 
 export const QuizListItem = ({ item, redirectToQuiz, status }) => {
   return (
@@ -21,19 +21,26 @@ export const QuizListItem = ({ item, redirectToQuiz, status }) => {
           )}
         </Box>
         <Box>
-          <Group>
-            <Text>{item.title}</Text>
-            <Image
-              src={
-                item.difficulty === 'beginner'
-                  ? beginnerLogo
-                  : item.difficulty === 'intermediate'
-                    ? intermediateLogo
-                    : advancedLogo
-              }
-              w={60}
-            />
-          </Group>
+          <Text>{item.title}</Text>
+          <Flex>
+            <Text size='sm' c='dimmed' fw={400} mr={5}>
+              Difficulty:
+            </Text>
+            <Group>
+              <Tooltip label={capitalizeFirstLetter(item.difficulty)}>
+                <Image
+                  src={
+                    item.difficulty === 'beginner'
+                      ? beginnerLogo
+                      : item.difficulty === 'intermediate'
+                        ? intermediateLogo
+                        : advancedLogo
+                  }
+                  w={60}
+                />
+              </Tooltip>
+            </Group>
+          </Flex>
           <Text size='sm' c='dimmed' fw={400}>
             {item.description}
           </Text>
