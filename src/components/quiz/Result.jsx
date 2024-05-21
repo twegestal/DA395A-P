@@ -1,12 +1,10 @@
 import React from 'react';
 import { Stack, Modal } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
 import { CorrectAnswer } from './CorrectAnswer';
 import { IncorrectAnswer } from './IncorrectAnswer';
 import '../styles.css';
 
 export const Result = ({ opened, result: { results, score }, onClose }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
   return (
     <Modal
       opened={opened}
@@ -14,7 +12,6 @@ export const Result = ({ opened, result: { results, score }, onClose }) => {
       padding={20}
       title={`You got ${score} out of ${results.length} points`}
       className={'modal'}
-      fullScreen={isMobile}
     >
       <Stack>
         {results.map((answer, index) => (
