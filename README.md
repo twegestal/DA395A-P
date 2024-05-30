@@ -39,7 +39,13 @@ cd DA395A-P
 npm install
 ```
 
-3. Run the development server:
+3. Api access:
+
+Create an API key on [OpenAI's webpage](https://platform.openai.com/account/api-keys). Then, create a `.env` file and paste your API key as described in the `.env.example`.
+
+If you are a teacher reviewing this project - an api key is added as a comment on the inlämningssida i Canvas
+
+4. Run the development server:
 
 ```bash
 npm run dev
